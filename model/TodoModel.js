@@ -9,10 +9,6 @@ const todoSchema = new mongoose.Schema({
       type: String,
       default: false,
     },
-    // createdAt: {
-    //   type: String,
-    //   default: setDateValue(),
-    // },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

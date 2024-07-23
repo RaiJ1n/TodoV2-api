@@ -18,8 +18,8 @@ app.use(cors({
     credentials: true,
 }));
 
-app.use("/todo", todoRoutes);
-app.use("/todo", userRoutes);
+app.use("/api", todoRoutes);
+app.use("/api", userRoutes);
 
 mongoose
     .connect("mongodb://127.0.0.1:27017/tododb")

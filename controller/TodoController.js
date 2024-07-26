@@ -51,7 +51,8 @@ exports.getTask = async (req, res) => {
 exports.updateTask = async (req, res) => {
     const todoId = req.params.id;
     const { todo } = req.body;
-
+    console.log(todoId);
+    console.log(req.body);
     try {
         const updateTask = await Todo.findByIdAndUpdate(
             todoId,
@@ -60,9 +61,9 @@ exports.updateTask = async (req, res) => {
                 runValidators: true,
                 new: true,
             }
+            
         );
-
-        console.log(updateTask);
+        
 
         if (updateTask) {
             return res.status(200).json({
@@ -76,7 +77,7 @@ exports.updateTask = async (req, res) => {
         });
     } catch (err) {
         return res.status(404).json({
-            message: "Internal server error", err,
+            content: err.message,
         });
     }
 };

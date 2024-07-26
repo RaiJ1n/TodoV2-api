@@ -49,12 +49,12 @@ exports.getTask = async (req, res) => {
 };
 
 exports.updateTask = async (req, res) => {
-    const todoid = req.params.id;
+    const todoId = req.params.id;
     const { todo } = req.body;
 
     try {
         const updateTask = await Todo.findByIdAndUpdate(
-            todoid,
+            todoId,
             { todo: todo },
             {
                 runValidators: true,

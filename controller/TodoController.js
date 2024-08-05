@@ -79,7 +79,7 @@ exports.updateTask = async (req, res) => {
 
 exports.deleteTask = async (req, res) => {
     const todoid = req.params.id;
-
+    console.log(req.params.id)
     try {
         const getCurrentUser = await User.findOne({ email: req.user.email });
 

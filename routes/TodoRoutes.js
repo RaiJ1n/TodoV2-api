@@ -6,6 +6,6 @@ const authController = require('../middleware/checkAuth');
 router.get("/todo", authController.verifyToken, todoController.getTask);
 router.post("/add/task", authController.verifyToken, todoController.createTask);
 router.post("/update", todoController.updateTask);
-router.post("/delete", todoController.deleteTask);
+router.post("/delete/:id", todoController.deleteTask);
 
 module.exports = router;

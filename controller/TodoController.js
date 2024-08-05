@@ -49,38 +49,32 @@ exports.getTask = async (req, res) => {
 };
 
 exports.updateTask = async (req, res) => {
-    const todoId = req.params.id;
-    const { todo } = req.body;
-    console.log(todoId);
-    console.log(req.body);
+    const { id, todo } = req.body;
     try {
-        const updateTask = await Todo.findByIdAndUpdate(
-            todoId,
-            { todo: todo },
-            {
-                runValidators: true,
-                new: true,
-            }
-            
-        );
-        
-
-        if (updateTask) {
-            return res.status(200).json({
-                status: "Successfully Changed",
-                content: updateTask,
-            });
+      const updateTask = await Todo.findByIdAndUpdate(
+        id,
+        { todo: todo },
+        {
+          runValidators: true,
+          new: true,
         }
-
-        return res.status(204).json({
-            message: "Task not found",
+      );
+      if (updateTask) {
+        return res.status(200).json({
+          status: "Successfully Changed",
+          content: updateTask,
         });
+      }
+  
+      return res.status(204).json({
+        message: "Task not found",
+      });
     } catch (err) {
-        return res.status(404).json({
-            content: err.message,
-        });
+      return res.status(404).json({
+        content: err.message,
+      });
     }
-};
+  };
 
 
 exports.deleteTask = async (req, res) => {

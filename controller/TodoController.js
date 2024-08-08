@@ -81,21 +81,7 @@ exports.deleteTask = async (req, res) => {
     const todoid = req.params.id;
     console.log(req.params.id)
     try {
-        // const getCurrentUser = await User.findOne({ email: req.user.email });
-
-        // if (!getCurrentUser) {
-        //     return res.status(204).json({
-        //         message: "User not found",
-        //     });
-        // }
-
-        // getCurrentUser.taskList = getCurrentUser.taskList.filter(
-        //     (taskId) => taskId.toString() !== todoid
-        // );
         
-        
-
-
         const deletedTask = await Todo.findByIdAndDelete(todoid);
 
         if (!deletedTask) {

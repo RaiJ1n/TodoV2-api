@@ -76,6 +76,34 @@ exports.updateTask = async (req, res) => {
     }
   };
 
+  exports.toggleTaskCompletion = async (req, res) => {
+    const { todoId } = req.body; 
+    
+    try {
+        const todo = await Todo.findById(todoId);
+        
+        if (!todo) {
+            return res.status(404).json({
+                message: "Task not found",
+            });
+        }
+
+        todo.isfinished = !todo.isfinished; 
+        await todo.save(); 
+
+        res.status(200).json({
+            status: "Successfully Updated",
+            content: todo,
+        });
+    } catch (err) {
+        return res.status(500).json({
+            message: "Internal server error",
+            content: err.message,
+        });
+    }
+};
+
+
 
 exports.deleteTask = async (req, res) => {
     const todoid = req.params.id;

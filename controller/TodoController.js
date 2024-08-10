@@ -101,7 +101,7 @@ exports.updateTask = async (req, res) => {
             content: todo,
         });
     } catch (err) {
-        return res.status(500).json({
+        return res.status(400).json({
             message: "Internal server error",
             content: err.message,
         });

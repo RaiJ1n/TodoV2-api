@@ -93,8 +93,7 @@ exports.updateTask = async (req, res) => {
             });
         }
         
-        // todo.isfinished = !todo.isfinished; 
-        // await todo.save(); 
+        
 
         res.status(200).json({
             status: "Checked",

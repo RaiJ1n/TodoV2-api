@@ -97,7 +97,7 @@ exports.updateTask = async (req, res) => {
         await todo.save(); 
 
         res.status(200).json({
-            status: "Successfully Updated",
+            status: "Checked",
             content: todo,
         });
     } catch (err) {

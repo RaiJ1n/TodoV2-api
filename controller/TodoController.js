@@ -80,14 +80,19 @@ exports.updateTask = async (req, res) => {
     const { todoId } = req.body; 
     
     try {
-        const todo = await Todo.findById(todoId);
+        const todo = await Todo.findById(todoId, 
+          {
+            runValidators: true,
+            new: true
+          }
+        );
         
         if (!todo) {
             return res.status(404).json({
                 message: "Task not found",
             });
         }
-
+        
         todo.isfinished = !todo.isfinished; 
         await todo.save(); 
 

@@ -77,27 +77,27 @@ exports.updateTask = async (req, res) => {
   };
 
   exports.toggleTaskCompletion = async (req, res) => {
-    const { todoId } = req.body; 
-    
+    const { todoId } = req.body;
+
     try {
-        const todo = await Todo.findById(todoId, 
-          {
-            runValidators: true,
-            new: true
-          }
-        );
-        
-        if (!todo) {
+        // Find the existing task
+        const existingTodo = await Todo.findById(todoId);
+
+        if (!existingTodo) {
             return res.status(404).json({
                 message: "Task not found",
             });
         }
-        
-        
+
+        const updatedTodo = await Todo.findByIdAndUpdate(
+            todoId,
+            { isFinished: existingTodo.isFinished === true ? false : true },
+            { new: true, runValidators: true }
+        );
 
         res.status(200).json({
-            status: "Checked",
-            content: todo,
+            status: updatedTodo.isFinished ? "Checked" : "Unchecked",
+            content: updatedTodo,
         });
     } catch (err) {
         return res.status(400).json({
@@ -106,6 +106,9 @@ exports.updateTask = async (req, res) => {
         });
     }
 };
+
+
+
 
 
 
